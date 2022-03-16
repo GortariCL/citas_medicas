@@ -6,6 +6,7 @@ const _lodash = require('lodash');
 const chalk = require("chalk");
 
 let usuarios = [];
+let usuariosConsola = [];
 
 http.createServer((req, res) => {
     res.writeHead(200, { 'Content-Type': 'text/html' });
@@ -25,15 +26,18 @@ http.createServer((req, res) => {
                 let fecha = moment().format('MMMM Do YYYY, h:mm:ss a');
                 let usuario =  `Nombre: ${nombre} - Apellido: ${apellido} - id: ${id} - timestap: ${fecha}`;
                 usuarios.push(usuario); 
+                usuariosConsola.push(usuario);
+                let indice = 0;
                 //4. Por cada consulta realizada al servidor, se debe devolver al cliente una lista con los
                 //datos de todos los usuarios registrados usando Lodash para recorrer el arreglo de
                 //usuarios.
                 _lodash.forEach(usuarios, (e,i) => {
                     //5. En cada consulta también se debe imprimir por la consola del servidor la misma lista
                     //de usuarios pero con fondo blanco y color de texto azul usando el paquete Chalk.
-                    console.log(chalk.bgWhite.blue(`${i+1}. ${usuarios[i]}`));
                     res.write(`${i+1}. ${usuarios[i]}<br>`);
+                    indice++;                    
                 })
+                console.log(chalk.bgWhite.blue(`${indice}. ${usuariosConsola.pop()}`));
                 res.end();
             })
             .catch((e) => {
