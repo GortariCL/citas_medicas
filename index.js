@@ -31,7 +31,7 @@ http.createServer((req, res) => {
                 _lodash.forEach(usuarios, (e,i) => {
                     //5. En cada consulta también se debe imprimir por la consola del servidor la misma lista
                     //de usuarios pero con fondo blanco y color de texto azul usando el paquete Chalk.
-                    console.log(chalk.bgWhite(chalk.blue(`${i+1}. ${usuarios[i]}`)));
+                    console.log(chalk.bgWhite.blue(`${i+1}. ${usuarios[i]}`));
                     res.write(`${i+1}. ${usuarios[i]}<br>`);
                 })
                 res.end();
